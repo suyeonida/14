@@ -3,21 +3,30 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+struct Book{
+	int number;
+	char title[20];
+}; 
+
 int main(int argc, char *argv[]){
-	char *pc=NULL;                // 메모리가 할당되지 않은 포인터  
-	int i=0;
+	struct Book *p;     //struct Book형 (int형 처럼) 포인터 p를 생성. 
 	
-	pc=(char*)malloc(100*sizeof(char));	//char 형태의 사이즈가 100인 포인터로 만들어준다. 
-	if(pc==NULL){
+	p =(struct Book*)malloc(2*sizeof(struct Book));
+	
+	if(p ==NULL){
 		printf("메모리 할당 오류\n");
-		exit(1);     //return -1;과 같은 의미  
-	}
-	for(i=0;i<26;i++){	//4*26=104 전까지 0~26이면 총 100bytes 
-		pc[i]='a' +i;
-	}
-	pc[i]=0;
-	printf("%s\n",pc);
-	free(pc);
+		return -1;
+	}	
+	
+	p->number=1;
+	strcpy(p->title, "C programming");
+	
+	(p+1)->number =2;
+	strcpy((p+1)->title, "Electronics");
+	printf(" %s %s \n",p->title, (p+1)->title);
+	
+	free(p);
+	return;
 }
 
 
